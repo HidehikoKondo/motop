@@ -2,101 +2,169 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
-  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 
-  <script>
-    window.fn = {};
+    <script>
+        window.fn = {};
 
-    window.fn.open = function () {
-      var menu = document.getElementById('menu');
-      menu.open();
-    };
+        window.fn.open = function () {
+            var menu = document.getElementById('menu');
+            menu.open();
+        };
 
-    window.fn.load = function (page) {
-      var content = document.getElementById('content');
-      var menu = document.getElementById('menu');
-      content.load(page)
-        .then(menu.close.bind(menu));
-    };
+        window.fn.load = function (page) {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load(page)
+                .then(menu.close.bind(menu));
+        };
 
-  </script>
+    </script>
+    <style>
+
+    </style>
 </head>
 
 <body>
-  <ons-splitter>
-    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
-      <ons-page>
-        <ons-list>
-          <ons-list-item onclick="fn.load('home.html')" tappable>
-            Home
-          </ons-list-item>
-          <ons-list-item onclick="fn.load('settings.html')" tappable>
-            Settings
-          </ons-list-item>
-          <ons-list-item onclick="fn.load('about.html')" tappable>
-            About
-          </ons-list-item>
-        </ons-list>
-      </ons-page>
-    </ons-splitter-side>
-    <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
-  </ons-splitter>
+    <ons-splitter>
+        <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+            <ons-page>
+                <ons-list>
+                    <ons-list-item onclick="fn.load('home.html')" tappable>
+                        マップ
+                    </ons-list-item>
+                    <ons-list-item onclick="fn.load('settings.html')" tappable>
+                        設定
+                    </ons-list-item>
+                    <ons-list-item onclick="fn.load('about.html')" tappable>
+                        トメタについて
+                    </ons-list-item>
+                    <ons-list-item onclick="fn.load('about.html')" tappable>
+                        開発者を応援（広告）
+                    </ons-list-item>
+                    <ons-list-item onclick="fn.load('privacypolicy.html')" tappable>
+                        プライバシーポリシー
+                    </ons-list-item>
+                </ons-list>
+            </ons-page>
+        </ons-splitter-side>
+        <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+    </ons-splitter>
 
-  <template id="home.html">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left">
-          <ons-toolbar-button onclick="fn.open()">
-            <ons-icon icon="md-menu"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-        <div class="center">
-          Main
-        </div>
-      </ons-toolbar>
-      <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+    <template id="home.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button onclick="fn.open()">
+                        <ons-icon icon="md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">
+                    マップ
+                </div>
+            </ons-toolbar>
+            <!-- <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
         Swipe right to open the menu!
-      </p>
+      </p> -->
 
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1630.7190888019124!2d136.90997412597275!3d35.170629887057636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1590747266832!5m2!1sja!2sjp"
-        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-        tabindex="0"></iframe>
-      </iframe>
-    </ons-page>
-  </template>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1630.7190888019124!2d136.90997412597275!3d35.170629887057636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1590747266832!5m2!1sja!2sjp"
+                width="100%"" height=" 100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                tabindex="0"></iframe>
+            </iframe>
+            <button>トメタ</button>あああ
+        </ons-page>
+    </template>
 
-  <template id="settings.html">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left">
-          <ons-toolbar-button onclick="fn.open()">
-            <ons-icon icon="md-menu"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-        <div class="center">
-          Settingsaaaa
-        </div>
-      </ons-toolbar>
-    </ons-page>
-  </template>
+    <template id="settings.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button onclick="fn.open()">
+                        <ons-icon icon="md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">
+                    Settingsaaaa
+                </div>
+            </ons-toolbar>
+            aaaaa
+        </ons-page>
+    </template>
 
-  <template id="about.html">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left">
-          <ons-toolbar-button onclick="fn.open()">
-            <ons-icon icon="md-menu"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-        <div class="center">
-          About
-        </div>
-      </ons-toolbar>
-    </ons-page>
-  </template>
+    <template id="about.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button onclick="fn.open()">
+                        <ons-icon icon="md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">
+                    About
+                </div>
+            </ons-toolbar>
+        </ons-page>
+    </template>
+
+    <template id="privacypolicy.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button onclick="fn.open()">
+                        <ons-icon icon="md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">
+                    プライバシーポリシー
+                </div>
+            </ons-toolbar>
+            <ons-card>
+
+                <h1>個人情報の利用目的</h1>
+                <p>当アプリでは、メールでのお問い合わせなどの際に、名前、メールアドレス等の個人情報をご登録いただく場合がございます。
+                    これらの個人情報はお問い合わせに対する回答や必要な情報を電子メールなどでご連絡する場合に利用させていただくものであり、個人情報をご提供いただく際の目的以外では利用いたしません。</p>
+                <h1>個人情報の第三者への開示</h1>
+                <p>当アプリでは、個人情報は適切に管理し、以下に該当する場合を除いて第三者に開示することはありません。<br />
+                    ・本人のご了解がある場合<br />
+                    ・法令等への協力のため、開示が必要となる場合<br /></p>
+                <h1>個人情報の開示、訂正、追加、削除、利用停止</h1>
+                <p>ご本人からの個人データの開示、訂正、追加、削除、利用停止のご希望の場合には、ご本人であることを確認させていただいた上、速やかに対応させていただきます。</p>
+                <h1>位置情報の利用目的</h1>
+                <p>当サイトでは地図を利用する当アプリのためお使いのPC、スマホから位置情報を取得します。投稿した駐輪場情報と位置情報を紐づけるために利用をします。</p>
+                <h1>位置情報の第三者への提供について</h1>
+                <p>当アプリで投稿された情報は当アプリの利用者が閲覧できます<br />
+                    ・駐輪場情報（ツイート）<br />
+                    ・Twitterユーザー名
+                    ・駐輪場の位置情報<br />
+                </p>
+                <p>当アプリで利用しているサーバーに上記の情報も保存されます。</p>
+                <p>当アプリの利用者の位置情報をリアルタイムに追跡し、その情報を保存および第三者への提供をすることはありません。</p>
+                <h1>クッキー（Cookie）</h1>
+                <p>当アプリでは、一部のコンテンツについてCookie（クッキー）を利用しています。
+                    Cookieとは、サイトにアクセスした際にブラウザに保存される情報ですが、お名前やメールアドレス等の個人情報は含まれません。
+                    当アプリにアクセスいただいた方々に効果的な広告を配信するためやアクセス解析にCookieの情報を利用させていただく場合があります。
+                    ブラウザの設定により、Cookieを使用しないようにすることも可能です。
+                    当アプリで利用しているアクセス解析、広告サービスは以下のとおりです。<br />
+                    ・Google Analytics<br />
+                    ・Adsense<br />
+                    ・Firebase</p>
+                <h1>第三者配信の広告サービスとCookie</h1>
+                <p>当アプリでは、第三者配信の広告サービスである「Adsense」を利用し、第三者配信事業者や広告ネットワークの配信する広告が掲載されます。
+                    この広告サービスでは、上述のCookieを利用することで、ユーザーが当アプリに訪れた情報や過去他のサイトに訪れた情報に基づき、適切な広告を表示します。
+                    Cookieを利用した広告を無効にする方法についてはこちらの広告設定をご参照ください。</p>
+                <h1>プライバシーポリシーの変更について</h1>
+                <p>当アプリは、個人情報に関して適用される日本の法令を遵守するとともに、本ポリシーの内容を適宜見直しその改善に努めます。
+                    修正された最新のプライバシーポリシーは常に本ページにて開示されます。</p>
+                <h1>免責事項</h1>
+                <p>当アプリのコンテンツ・情報につきまして、可能な限り正確な情報を掲載するよう努めておりますが、誤情報が入り込んだり、情報が古くなっていることもございます。
+                    当アプリに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。</p>
+            </ons-card>
+
+        </ons-page>
+    </template>
 </body>
 
 </html>
