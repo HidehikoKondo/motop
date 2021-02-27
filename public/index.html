@@ -22,9 +22,35 @@
         };
 
     </script>
-    <style>
+    <!-- Google Maps -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style type="text/css">
+        /* Always set the map height explicitly to define the size of the div
+           * element that contains the map. */
+        #map {
+            height: 100%;
+        }
 
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
     </style>
+    <script>
+        let map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8,
+            });
+        }
+    </script>
+    <!--　↑ Google Maps -->
+
 </head>
 
 <body>
@@ -69,11 +95,33 @@
         Swipe right to open the menu!
       </p> -->
 
-            <iframe
+            <!-- <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1630.7190888019124!2d136.90997412597275!3d35.170629887057636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1590747266832!5m2!1sja!2sjp"
                 width="100%"" height=" 100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
                 tabindex="0"></iframe>
-            </iframe>
+            </iframe> -->
+            <div id="map"></div>
+
+            <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5UJ22OWXZvry9vyPGVyPXxxjnMZjtjPE&callback=initMap&libraries=&v=weekly"
+                async></script>
+            <script async
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5UJ22OWXZvry9vyPGVyPXxxjnMZjtjPE&callback=initMap">
+                    alert("xxx");
+                </script>
+            <script>
+                alert("xxx"
+;                let map;
+
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById("map"), {
+                        center: { lat: -34.397, lng: 150.644 },
+                        zoom: 8,
+                    });
+                }
+
+            </script>
             <ons-speed-dial position="bottom center" direction="up">
                 <ons-fab>
                     <ons-icon icon="md-share"></ons-icon>
