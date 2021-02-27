@@ -1,12 +1,8 @@
-# tasks:
-#   - init: 'echo "TODO: Replace with init/build command"'
-#     command: 'echo "TODO: Replace with command to start project"'
-
 tasks:
   - init: |
       npm install -g firebase-tools
-      cd /workspace/www.udonko.net/firebase
+      cd /workspace/motop
       npm install
     command: |
-      cd /workspace/www.udonko.net/firebase
+      cd /workspace/motop
       firebase login:ci --no-localhost
