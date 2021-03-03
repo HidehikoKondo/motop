@@ -1,8 +1,0 @@
-tasks:
-  - init: |
-      npm install -g firebase-tools
-      cd /workspace/motop
-      npm install
-    command: |
-      cd /workspace/motop
-      firebase login:ci --no-localhost
