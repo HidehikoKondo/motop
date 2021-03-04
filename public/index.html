@@ -56,6 +56,24 @@
                 streetViewControl: true,
             });
 
+            var marker = new google.maps.Marker({
+                position: { lat: -28.024, lng: 140.887 },
+                map,
+                title: "Click to zoom",
+            });
+
+
+            map.addListener("click", (e) => {
+                placeMarkerAndPanTo(e.latLng, map, marker);
+            });
+
+
+            function placeMarkerAndPanTo(latLng, map, marker) {
+                marker.setPosition(latLng)
+                map.panTo(latLng);
+            }
+
+
             // Create an array of alphabetical characters used to label the markers.
             const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             // Add some markers to the map.
@@ -74,6 +92,8 @@
                     "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
             });
         }
+
+
         const locations = [
             { lat: -31.56391, lng: 147.154312 },
             { lat: -33.718234, lng: 150.363181 },
