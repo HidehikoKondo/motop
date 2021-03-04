@@ -144,7 +144,7 @@
 
     <template id="home.html">
         <ons-page>
-            <ons-toolbar>
+            <!-- <ons-toolbar>
                 <div class="left">
                     <ons-toolbar-button onclick="fn.open()">
                         <ons-icon icon="md-menu"></ons-icon>
@@ -153,7 +153,7 @@
                 <div class="center">
                     マップ
                 </div>
-            </ons-toolbar>
+            </ons-toolbar> -->
             <!-- <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
         Swipe right to open the menu!
       </p> -->
@@ -172,6 +172,8 @@
             <script async
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5UJ22OWXZvry9vyPGVyPXxxjnMZjtjPE&callback=initMap">
                 </script>
+
+            <!-- 投稿ボタン -->
             <ons-speed-dial position="bottom center" direction="up">
                 <ons-fab>
                     <ons-icon icon="md-share"></ons-icon>
@@ -185,6 +187,14 @@
                 <ons-speed-dial-item>
                     <ons-icon icon="md-google-plus"></ons-icon>
                 </ons-speed-dial-item>
+            </ons-speed-dial>
+
+            <!--ハンバーガーメニュー-->
+            <ons-speed-dial position="left top" direction="down" onclick="fn.open()">
+                <ons-fab>
+                    <ons-icon icon="md-menu"></ons-icon>
+                </ons-fab>
+
             </ons-speed-dial>
         </ons-page>
     </template>
