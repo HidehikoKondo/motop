@@ -49,9 +49,11 @@
 
     <!-- マップの制御 -->
     <script>
-        let map, infoWindow;
+        let map;
+        let infoWindow;
 
         function initMap() {
+
             map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 3,
                 center: { lat: -28.024, lng: 140.887 },
@@ -60,11 +62,18 @@
                 streetViewControl: true,
             });
 
+            infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
+                content: '<button>aaa</button>' // 吹き出しに表示する内容
+            });
+
             // マーカー
             var marker = new google.maps.Marker({
                 position: { lat: -28.024, lng: 140.887 },
                 map,
                 title: "Click to zoom",
+            });
+            marker.addListener('click', function () { // マーカーをクリックしたとき
+                infoWindow.open(map, marker); // 吹き出しの表示
             });
             // クリックイベント
             map.addListener("click", (e) => {
@@ -99,43 +108,38 @@
 
 
 
-            infoWindow = new google.maps.InfoWindow();
-            const locationButton = document.createElement("button");
-            locationButton.textContent = "Pan to Current Location";
-            locationButton.classList.add("custom-map-control-button");
-            map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-            locationButton.addEventListener("click", () => {
-                // Try HTML5 geolocation.
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        (position) => {
-                            const pos = {
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude,
-                            };
-                            infoWindow.setPosition(pos);
-                            infoWindow.setContent("Location found.");
-                            infoWindow.open(map);
-                            map.setCenter(pos);
-                        },
-                        () => {
-                            handleLocationError(true, infoWindow, map.getCenter());
-                        }
-                    );
-                } else {
-                    // Browser doesn't support Geolocation
-                    handleLocationError(false, infoWindow, map.getCenter());
-                }
-            });
 
+        }
 
+        function currentPosition() {
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent("現在地：〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇付近");
+                        infoWindow.open(map);
+                        map.setCenter(pos);
+                    },
+                    () => {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    }
+                );
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
         }
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
             infoWindow.setPosition(pos);
             infoWindow.setContent(
                 browserHasGeolocation
-                    ? "Error: The Geolocation service failed."
-                    : "Error: Your browser doesn't support geolocation."
+                    ? "Error: GPSがコケました"
+                    : "Error: GPSが使えません"
             );
             infoWindow.open(map);
         }
@@ -189,7 +193,7 @@
                         開発者を応援（広告）
                     </ons-list-item>
                     <ons-list-item onclick="fn.load('privacypolicy.html')" tappable>
-                        プライバシーポリシー
+                        利用規約<br />プライバシーポリシー
                     </ons-list-item>
                 </ons-list>
             </ons-page>
@@ -248,6 +252,11 @@
             <ons-speed-dial position="left top" direction="down" onclick="fn.open()">
                 <ons-fab>
                     <ons-icon icon="md-menu"></ons-icon>
+                </ons-fab>
+            </ons-speed-dial>
+            <ons-speed-dial position="right top" direction="down" onClick="currentPosition();">
+                <ons-fab>
+                    <ons-icon icon="md-compass"></ons-icon>
                 </ons-fab>
 
             </ons-speed-dial>
@@ -388,6 +397,13 @@
 
         </ons-page>
     </template>
+    <div class="toast" id="GDPR">
+        <div class="toast__message">
+            このサイトでは、サイトや広告を改善するためにCookieを利用します。サイトを利用することで、Cookieの使用に同意するものとします。また当サービスの利用規約にも同意したものとします。
+        </div>
+        <button class="fab fab--mini" onclick="getElementById('GDPR').remove();" style="min-width: 40px;"><i
+                class="zmdi zmdi-close"></i></button>
+    </div>
 </body>
 
 </html>
