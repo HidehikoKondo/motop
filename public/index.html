@@ -34,6 +34,7 @@
 
     <!-- メニューの制御 -->
     <script>
+        //OnsenUI初期設定
         window.fn = {};
         window.fn.open = function () {
             var menu = document.getElementById('menu');
@@ -45,36 +46,73 @@
             content.load(page)
                 .then(menu.close.bind(menu));
         };
+
+        //アクションシートの制御
+        var app = {};
+        ons.ready(function () {
+            ons.createElement('action-sheet.html', { append: true })
+                .then(function (sheet) {
+                    app.showFromTemplate = sheet.show.bind(sheet);
+                    app.hideFromTemplate = sheet.hide.bind(sheet);
+                });
+        });
     </script>
 
     <!-- マップの制御 -->
     <script>
         let map;
         let infoWindow;
+        let currenMarker;
 
         function initMap() {
 
+            //マップの初期位置
             map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 3,
-                center: { lat: -28.024, lng: 140.887 },
+                zoom: 18,
+                center: { lat: 35.1709076, lng: 136.9074532 },
                 disableDefaultUI: true,
-                zoomControl: true,
+                //                zoomControl: true,
                 streetViewControl: true,
+                //お店のアイコン削除
+                clickableIcons: false,
+                styles: [{
+                    featureType: 'poi.business',
+                    stylers: [
+                        { visibility: 'off' }
+                    ]
+                }]
             });
 
+            //現在地用のマーカー
+            currenMarker = new google.maps.Marker({
+                position: { lat: 35.1709076, lng: 136.9074532 },
+                map: map,
+                title: "現在地",
+                icon:
+                    "https://motop-pwa.web.app/images/currentPosition.png",
+
+            });
+            currenMarker.addListener('click', function () { // マーカーをクリックしたとき
+                infoWindow.open(map, currenMarker); // 吹き出しの表示
+                app.showFromTemplate();
+            });
+
+            //吹き出し
             infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
-                content: '<button>aaa</button>' // 吹き出しに表示する内容
+                content: '〇〇〇〇〇〇〇付近'
             });
 
-            // マーカー
+            // マーカー（クリック）
             var marker = new google.maps.Marker({
-                position: { lat: -28.024, lng: 140.887 },
-                map,
-                title: "Click to zoom",
+                position: { lat: 0, lng: 0 },
+                map: map,
             });
             marker.addListener('click', function () { // マーカーをクリックしたとき
                 infoWindow.open(map, marker); // 吹き出しの表示
+                app.showFromTemplate();
             });
+
+
             // クリックイベント
             map.addListener("click", (e) => {
                 placeMarkerAndPanTo(e.latLng, map, marker);
@@ -120,9 +158,8 @@
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
                         };
-                        infoWindow.setPosition(pos);
-                        infoWindow.setContent("現在地：〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇付近");
-                        infoWindow.open(map);
+                        map.se
+                        currenMarker.setPosition(pos);
                         map.setCenter(pos);
                     },
                     () => {
@@ -135,40 +172,25 @@
             }
         }
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(
-                browserHasGeolocation
-                    ? "Error: GPSがコケました"
-                    : "Error: GPSが使えません"
-            );
-            infoWindow.open(map);
+            var message = browserHasGeolocation
+                ? "エラー: GPSの位置情報が読み込めませんでした"
+                : "エラー: GPSが使えないデバイスです"
+            ons.notification.toast(message, { timeout: 3000, animation: 'fall' });
         }
 
         //マーカーの配置場所配列
         const locations = [
-            { lat: -31.56391, lng: 147.154312 },
-            { lat: -33.718234, lng: 150.363181 },
-            { lat: -33.727111, lng: 150.371124 },
-            { lat: -33.848588, lng: 151.209834 },
-            { lat: -33.851702, lng: 151.216968 },
-            { lat: -34.671264, lng: 150.863657 },
-            { lat: -35.304724, lng: 148.662905 },
-            { lat: -36.817685, lng: 175.699196 },
-            { lat: -36.828611, lng: 175.790222 },
-            { lat: -37.75, lng: 145.116667 },
-            { lat: -37.759859, lng: 145.128708 },
-            { lat: -37.765015, lng: 145.133858 },
-            { lat: -37.770104, lng: 145.143299 },
-            { lat: -37.7737, lng: 145.145187 },
-            { lat: -37.774785, lng: 145.137978 },
-            { lat: -37.819616, lng: 144.968119 },
-            { lat: -38.330766, lng: 144.695692 },
-            { lat: -39.927193, lng: 175.053218 },
-            { lat: -41.330162, lng: 174.865694 },
-            { lat: -42.734358, lng: 147.439506 },
-            { lat: -42.734358, lng: 147.501315 },
-            { lat: -42.735258, lng: 147.438 },
-            { lat: -43.999792, lng: 170.463352 },
+            { lat: 35.1709071, lng: 136.909453 },
+            { lat: 35.1709076, lng: 136.8074532 },
+            { lat: 35.1709076, lng: 136.7074532 },
+            { lat: 35.1709076, lng: 136.6074532 },
+            { lat: 35.1709076, lng: 136.5074532 },
+            { lat: 35.1709076, lng: 136.4074532 },
+            { lat: 35.1709076, lng: 136.3074532 },
+            { lat: 35.1709076, lng: 136.2074532 },
+            { lat: 35.1709076, lng: 136.1074532 },
+            { lat: 35.1709076, lng: 136.0074532 },
+
         ];
 
     </script>
@@ -232,21 +254,6 @@
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5UJ22OWXZvry9vyPGVyPXxxjnMZjtjPE&callback=initMap">
                 </script>
 
-            <!-- 投稿ボタン -->
-            <ons-speed-dial position="bottom center" direction="up">
-                <ons-fab>
-                    <ons-icon icon="md-share"></ons-icon>
-                </ons-fab>
-                <ons-speed-dial-item>
-                    <ons-icon icon="md-twitter"></ons-icon>
-                </ons-speed-dial-item>
-                <ons-speed-dial-item>
-                    <ons-icon icon="md-facebook"></ons-icon>
-                </ons-speed-dial-item>
-                <ons-speed-dial-item>
-                    <ons-icon icon="md-google-plus"></ons-icon>
-                </ons-speed-dial-item>
-            </ons-speed-dial>
 
             <!--ハンバーガーメニュー-->
             <ons-speed-dial position="left top" direction="down" onclick="fn.open()">
@@ -254,15 +261,25 @@
                     <ons-icon icon="md-menu"></ons-icon>
                 </ons-fab>
             </ons-speed-dial>
-            <ons-speed-dial position="right top" direction="down" onClick="currentPosition();">
+            <ons-speed-dial position="center bottom" direction="down" onClick="currentPosition();">
                 <ons-fab>
                     <ons-icon icon="md-compass"></ons-icon>
                 </ons-fab>
 
             </ons-speed-dial>
         </ons-page>
-    </template>
 
+    </template>
+    <!-- 投稿アクションシート -->
+    <template id="action-sheet.html">
+        <ons-action-sheet id="sheet" cancelable title="アクションを選択してください">
+            <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">この場所を投稿
+            </ons-action-sheet-button>
+            <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">ストリートビューを表示
+            </ons-action-sheet-button>
+            <ons-action-sheet-button icon="md-close" onclick="app.hideFromTemplate()">キャンセル</ons-action-sheet-button>
+        </ons-action-sheet>
+    </template>
     <template id="settings.html">
         <ons-page>
             <ons-toolbar>
