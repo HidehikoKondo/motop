@@ -10,11 +10,11 @@
     <meta property="og:url" content="https://motop-pwa.web.app/">
 
     <!-- Service Worker -->
-    <link rel="manifest" href="https://motop-pwa.web.app/pwa/manifest.json">
+    <link rel="manifest" href="https://motop-pwa.web.app/manifest.json">
     <script>
         window.addEventListener('load', function () {
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register("https://motop-pwa.web.app/pwa/sw.js");
+                navigator.serviceWorker.register("https://motop-pwa.web.app/sw.js");
             }
         });
     </script>

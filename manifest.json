@@ -20,6 +20,6 @@
     ],
     "orientation": "portrait",
     "start_url": "./",
-    "display": "fullscreen",
+    "display": "minimal-ui",
     "theme_color": "#0000ff"
 }
