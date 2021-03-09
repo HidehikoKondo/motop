@@ -1,3 +1,20 @@
+//マーカーの配置場所配列
+const locations = [
+    { lat: 35.1709071, lng: 136.909453 },
+    { lat: 35.1709076, lng: 136.8074532 },
+    { lat: 35.1709076, lng: 136.7074532 },
+    { lat: 35.1709076, lng: 136.6074532 },
+    { lat: 35.1709076, lng: 136.5074532 },
+    { lat: 35.1709076, lng: 136.4074532 },
+    { lat: 35.1709076, lng: 136.3074532 },
+    { lat: 35.1709076, lng: 136.2074532 },
+    { lat: 35.1709076, lng: 136.1074532 },
+    { lat: 35.1709076, lng: 136.0074532 },
+
+];
+
+
+
 // < !--メニューの制御 -->
 //OnsenUI初期設定
 window.fn = {};
@@ -48,6 +65,10 @@ function initMap() {
         }]
     });
 
+    //ジオコーディングの初期化
+    const geocoder = new google.maps.Geocoder();
+
+
     //現在地用のマーカー
     currenMarker = new google.maps.Marker({
         position: { lat: 35.1709076, lng: 136.9074532 },
@@ -57,9 +78,12 @@ function initMap() {
             "https://motop-pwa.web.app/images/currentPosition.png",
 
     });
-    currenMarker.addListener('click', function () { // マーカーをクリックしたとき
-        infoWindow.open(map, currenMarker); // 吹き出しの表示
+    // 現在地のマーカーをクリックしたとき
+    currenMarker.addListener('click', function () {
+        infoWindow.close();
         app.showFromTemplate();
+        infoWindow.open(map, currenMarker); // 吹き出しの表示
+        geocodeLatLng(geocoder, map, infoWindow, currenMarker);
     });
 
     //起動後に現在地に移動
@@ -67,7 +91,7 @@ function initMap() {
 
     //吹き出し
     infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
-        content: '〇〇〇〇〇〇〇付近'
+        content: '現在地'
     });
 
     // マーカー（クリック）
@@ -75,13 +99,15 @@ function initMap() {
         position: { lat: 0, lng: 0 },
         map: map,
     });
+
     marker.addListener('click', function () { // マーカーをクリックしたとき
         infoWindow.open(map, marker); // 吹き出しの表示
+        geocodeLatLng(geocoder, map, infoWindow, marker);
         app.showFromTemplate();
     });
 
 
-    // クリックイベント
+    //マップのクリックイベント
     map.addListener("click", (e) => {
         placeMarkerAndPanTo(e.latLng, map, marker);
     });
@@ -89,6 +115,7 @@ function initMap() {
     function placeMarkerAndPanTo(latLng, map, marker) {
         marker.setPosition(latLng)
         map.panTo(latLng);
+        infoWindow.close();
     }
 
     //マーカーのラベル
@@ -113,6 +140,9 @@ function initMap() {
     });
 
 
+    document.getElementById("submit").addEventListener("click", () => {
+        geocodeLatLng(geocoder, map, infoWindow);
+    });
 
 
 }
@@ -146,17 +176,23 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     ons.notification.toast(message, { timeout: 3000, animation: 'fall' });
 }
 
-//マーカーの配置場所配列
-const locations = [
-    { lat: 35.1709071, lng: 136.909453 },
-    { lat: 35.1709076, lng: 136.8074532 },
-    { lat: 35.1709076, lng: 136.7074532 },
-    { lat: 35.1709076, lng: 136.6074532 },
-    { lat: 35.1709076, lng: 136.5074532 },
-    { lat: 35.1709076, lng: 136.4074532 },
-    { lat: 35.1709076, lng: 136.3074532 },
-    { lat: 35.1709076, lng: 136.2074532 },
-    { lat: 35.1709076, lng: 136.1074532 },
-    { lat: 35.1709076, lng: 136.0074532 },
 
-];
+function geocodeLatLng(geocoder, map, infowindow, marker) {
+    const latlng = marker.position;
+    geocoder.geocode({ location: latlng }, (results, status) => {
+        if (status === "OK") {
+            if (results[0]) {
+                // marker = new google.maps.Marker({
+                //     position: latlng,
+                //     map: map,
+                // });
+                infowindow.setContent(results[0].formatted_address + "付近");
+                infowindow.open(map, marker);
+            } else {
+                window.alert("No results found");
+            }
+        } else {
+            window.alert("Geocoder failed due to: " + status);
+        }
+    });
+}
