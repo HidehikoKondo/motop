@@ -45,6 +45,7 @@ ons.ready(function () {
 let map;
 let infoWindow;
 let currenMarker;
+var selectedLatLng;
 
 function initMap() {
 
@@ -54,7 +55,7 @@ function initMap() {
         center: { lat: 35.1709076, lng: 136.9074532 },
         disableDefaultUI: true,
         //                zoomControl: true,
-        streetViewControl: true,
+        streetViewControl: false,
         //お店のアイコン削除
         clickableIcons: false,
         styles: [{
@@ -64,6 +65,35 @@ function initMap() {
             ]
         }]
     });
+
+    //ストリートビュー
+    const astorPlace = { lat: 40.729884, lng: -73.990988 };
+    // Set up the markers on the map
+    const cafeMarker = new google.maps.Marker({
+        position: { lat: 40.730031, lng: -73.991428 },
+        map,
+        icon:
+            "https://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=cafe|FFFF00",
+        title: "Cafe",
+    });
+    const bankMarker = new google.maps.Marker({
+        position: { lat: 40.729681, lng: -73.991138 },
+        map,
+        icon:
+            "https://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=dollar|FFFF00",
+        title: "Bank",
+    });
+    const busMarker = new google.maps.Marker({
+        position: { lat: 40.729559, lng: -73.990741 },
+        map,
+        icon:
+            "https://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=bus|FFFF00",
+        title: "Bus Stop",
+    });
+    // We get the map's default panorama and set up some defaults.
+    // Note that we don't yet set it visible.
+    panorama = map.getStreetView(); // TODO fix type
+
 
     //ジオコーディングの初期化
     const geocoder = new google.maps.Geocoder();
@@ -79,7 +109,8 @@ function initMap() {
 
     });
     // 現在地のマーカーをクリックしたとき
-    currenMarker.addListener('click', function () {
+    currenMarker.addListener('click', function (e) {
+        selectedLatLng = currenMarker.position;
         infoWindow.close();
         app.showFromTemplate();
         infoWindow.open(map, currenMarker); // 吹き出しの表示
@@ -101,6 +132,7 @@ function initMap() {
     });
 
     marker.addListener('click', function () { // マーカーをクリックしたとき
+        selectedLatLng = marker.position;
         infoWindow.open(map, marker); // 吹き出しの表示
         geocodeLatLng(geocoder, map, infoWindow, marker);
         app.showFromTemplate();
@@ -195,4 +227,48 @@ function geocodeLatLng(geocoder, map, infowindow, marker) {
             window.alert("Geocoder failed due to: " + status);
         }
     });
+}
+
+
+//アクションシートのストリートビュー
+function openStreetView() {
+    panorama.setPosition(selectedLatLng);
+    panorama.setPov(
+    /** @type {google.maps.StreetViewPov} */ {
+            heading: 265,
+            pitch: 0,
+        }
+    );
+
+    //ストリートビューを閉じたらメニューを再表示
+    panorama.addListener("closeclick", function (argument) {
+        openMenu();
+    });
+
+
+    const toggle = panorama.getVisible();
+    if (toggle == false) {
+        panorama.setVisible(true);
+        closeMenu();
+    } else {
+        panorama.setVisible(false);
+
+    }
+}
+
+
+
+//メニューの表示非表示
+function openMenu() {
+    document.getElementById("humbrugerMenu").show();
+    document.getElementById("currentPositionButton").show();
+}
+function closeMenu() {
+    document.getElementById("humbrugerMenu").hide();
+    document.getElementById("currentPositionButton").hide();
+}
+
+//投稿ボタン
+function share() {
+    alert("開発中です");
 }

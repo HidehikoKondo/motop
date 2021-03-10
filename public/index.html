@@ -83,6 +83,7 @@
                 tabindex="0"></iframe>
             </iframe> -->
 
+
             <div id="map"></div>
 
             <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
@@ -95,12 +96,13 @@
 
 
             <!--ハンバーガーメニュー-->
-            <ons-speed-dial position="left top" direction="down" onclick="fn.open()">
+            <ons-speed-dial id="humbrugerMenu" position="left top" direction="down" onclick="fn.open()">
                 <ons-fab>
                     <ons-icon icon="md-menu"></ons-icon>
                 </ons-fab>
             </ons-speed-dial>
-            <ons-speed-dial position="center bottom" direction="down" onClick="currentPosition();">
+            <ons-speed-dial id="currentPositionButton" position="center bottom" direction="down"
+                onClick="currentPosition();">
                 <ons-fab>
                     <ons-icon icon="md-compass"></ons-icon>
                 </ons-fab>
@@ -112,11 +114,13 @@
     <!-- 投稿アクションシート -->
     <template id="action-sheet.html">
         <ons-action-sheet id="sheet" cancelable title="アクションを選択してください">
-            <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">この場所を投稿
+            <ons-action-sheet-button icon="md-local-parking" onclick="share(); app.hideFromTemplate()">この場所を投稿
             </ons-action-sheet-button>
-            <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">ストリートビューを表示
+            <ons-action-sheet-button icon="md-directions-walk" onclick="openStreetView(); app.hideFromTemplate()">
+                ストリートビューを表示
             </ons-action-sheet-button>
-            <ons-action-sheet-button icon="md-close" onclick="app.hideFromTemplate()">キャンセル</ons-action-sheet-button>
+            <ons-action-sheet-button icon="md-close" modifier="destructive" onclick="app.hideFromTemplate()">キャンセル
+            </ons-action-sheet-button>
         </ons-action-sheet>
     </template>
     <template id="settings.html">
@@ -255,7 +259,8 @@
     </template>
     <div class="toast" id="GDPR">
         <div class="toast__message">
-            このサイトでは、サイトや広告を改善するためにCookieを利用します。サイトを利用することで、Cookieの使用に同意するものとします。また当サービスの利用規約にも同意したものとします。
+            このアプリは開発中です。まだ動作しない機能もあります。ご注意ください。
+            <!-- このサイトでは、サイトや広告を改善するためにCookieを利用します。サイトを利用することで、Cookieの使用に同意するものとします。また当サービスの利用規約にも同意したものとします。 -->
         </div>
         <button class="fab fab--mini" onclick="getElementById('GDPR').remove();" style="min-width: 40px;"><i
                 class="zmdi zmdi-close"></i></button>
