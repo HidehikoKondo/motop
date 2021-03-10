@@ -133,13 +133,12 @@ function initMap() {
     });
     marker.addListener('click', function () { // マーカーをクリックしたとき
         selectedLatLng = marker.position;
-        infoWindow.open(map, marker); // 吹き出しの表示
+        infoWindow.close(); // 吹き出しの表示
         geocodeLatLng(geocoder, map, infoWindow, marker);
         app.showFromTemplate();
     });
     marker.addListener('dragend', function () { // マーカーをドラッグ後
         selectedLatLng = marker.position;
-        infoWindow.open(map, marker); // 吹き出しの表示
         geocodeLatLng(geocoder, map, infoWindow, marker);
 
     });
@@ -152,7 +151,8 @@ function initMap() {
     function placeMarkerAndPanTo(latLng, map, marker) {
         marker.setPosition(latLng)
         map.panTo(latLng);
-        infoWindow.close();
+        geocodeLatLng(geocoder, map, infoWindow, marker);
+        infoWindow.open(map, marker);
     }
 
     //マーカーのラベル
