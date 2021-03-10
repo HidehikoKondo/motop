@@ -105,7 +105,7 @@ function initMap() {
         map: map,
         title: "現在地",
         icon:
-            "https://motop-pwa.web.app/images/currentPosition.png",
+            "images/currentPosition.svg",
 
     });
     // 現在地のマーカーをクリックしたとき
@@ -129,15 +129,20 @@ function initMap() {
     var marker = new google.maps.Marker({
         position: { lat: 0, lng: 0 },
         map: map,
+        draggable: true,
     });
-
     marker.addListener('click', function () { // マーカーをクリックしたとき
         selectedLatLng = marker.position;
         infoWindow.open(map, marker); // 吹き出しの表示
         geocodeLatLng(geocoder, map, infoWindow, marker);
         app.showFromTemplate();
     });
+    marker.addListener('dragend', function () { // マーカーをドラッグ後
+        selectedLatLng = marker.position;
+        infoWindow.open(map, marker); // 吹き出しの表示
+        geocodeLatLng(geocoder, map, infoWindow, marker);
 
+    });
 
     //マップのクリックイベント
     map.addListener("click", (e) => {
