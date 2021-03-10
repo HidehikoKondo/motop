@@ -167,8 +167,6 @@ function initMap() {
     marker.addListener('dragend', function () { // マーカーをドラッグ後
         selectedLatLng = marker.position;
         geocodeLatLng(geocoder, map, infoWindow, marker);
-        alert(marker.position);
-
     });
 
     //マップのクリックイベント
@@ -231,7 +229,7 @@ function currentPosition() {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 };
-                map.se
+                map.setZoom(18);
                 currenMarker.setPosition(pos);
                 map.setCenter(pos);
             },
