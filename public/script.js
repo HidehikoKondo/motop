@@ -1,3 +1,28 @@
+//getパラメータ取得
+var queryString = window.location.search;
+var queryObject = new Object();
+if (queryString) {
+    queryString = queryString.substring(1);
+    var parameters = queryString.split('&');
+
+    for (var i = 0; i < parameters.length; i++) {
+        var element = parameters[i].split('=');
+
+        var paramName = decodeURIComponent(element[0]);
+        var paramValue = decodeURIComponent(element[1]);
+
+        queryObject[paramName] = paramValue;
+    }
+}
+
+var defaultLat = queryObject["lat"];
+var defaultLng = queryObject["lng"];
+
+// alert(queryObject["lat"]);
+// alert(queryObject["lng"]);
+
+
+
 //マーカーの配置場所配列
 const locations = [
     { lat: 35.1709071, lng: 136.909453 },
@@ -125,6 +150,8 @@ function initMap() {
         content: '現在地'
     });
 
+
+
     // マーカー（クリック）
     var marker = new google.maps.Marker({
         position: { lat: 0, lng: 0 },
@@ -140,6 +167,7 @@ function initMap() {
     marker.addListener('dragend', function () { // マーカーをドラッグ後
         selectedLatLng = marker.position;
         geocodeLatLng(geocoder, map, infoWindow, marker);
+        alert(marker.position);
 
     });
 
@@ -154,6 +182,16 @@ function initMap() {
         geocodeLatLng(geocoder, map, infoWindow, marker);
         infoWindow.open(map, marker);
     }
+
+    //getで位置情報があったらマーカーを設置して移動
+    if (defaultLat && defaultLng) {
+        var defaultPosition = new google.maps.LatLng(defaultLat, defaultLng)
+        marker.setPosition(defaultPosition)
+        map.panTo(defaultPosition);
+        geocodeLatLng(geocoder, map, infoWindow, marker);
+        infoWindow.open(map, marker);
+    }
+
 
     //マーカーのラベル
     // Create an array of alphabetical characters used to label the markers.
