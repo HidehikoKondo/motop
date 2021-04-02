@@ -29,11 +29,13 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
         });
     </script>
 
+
+
     <!-- js読み込み -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="script.js"></script>
-    <script src="firebase.js"></script>
+
 
     <!-- Google Maps -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -45,25 +47,6 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 
 
-    <!-- import firebase from "firebase/app";
-    import "firebase/database";
-    <script>
-
-        console.log("xxx");
-        var database = firebase.database();
-        function writeUserData(userId, name, email, imageUrl) {
-            firebase.database().ref('users/' + userId).set({
-                username: name,
-                email: email,
-                profile_picture: imageUrl
-            });
-            console.log("DB登録");
-        }
-
-        writeUserData("userID", "name", "email", "imageUrl");
-
-
-    </script> -->
 </head>
 
 <body>
@@ -300,23 +283,57 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
                 class="zmdi zmdi-close"></i></button>
     </div>
 
+    <!--firebase-->
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyCjkSfFoCQ1tRPnu8OBOYPdG7B2wiET1ZQ",
+            authDomain: "motop-pwa.firebaseapp.com",
+            databaseURL: "https://motop-pwa.firebaseio.com",
+            projectId: "motop-pwa",
+            storageBucket: "motop-pwa.appspot.com",
+            messagingSenderId: "249359485469",
+            appId: "1:249359485469:web:5b1fb6defe9af88ff694f4",
+            measurementId: "G-1MGG8Y67FG"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        //analytics
+        firebase.analytics();
+        // Get a reference to the database service
+        var database = firebase.database();
 
-    <body>
-        <script>// Firebase App (the core Firebase SDK) is always required and must be listed first
-            import firebase from "firebase/app";
-            // If you are using v7 or any earlier version of the JS SDK, you should import firebase using namespace import
-            // import * as firebase from "firebase/app"
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('users/' + userId).set({
+                username: name,
+                email: email,
+                profile_picture: imageUrl
+            });
+        }
+        function read() {
+            var database = firebase.database();
+            var dataRef = database.ref('/users');
+            dataRef.once("value")
+                .then(function (snapshot) {
+                    console.log(snapshot.child("userId").child("email").val());
 
-            // If you enabled Analytics in your project, add the Firebase SDK for Analytics
-            import "firebase/analytics";
+                    // document.getElementById("age").innerHTML = snapshot.child("age").val();
+                    // document.getElementById("job").innerHTML = snapshot.child("job").val();
+                    // document.getElementById("name").innerHTML = snapshot.child("name").val();
+                });
+        }
+        writeUserData("userId3", "name2", "email2", "imageUrl2");
+        read();
 
-            // Add the Firebase products that you want to use
-            import "firebase/auth";
-            import "firebase/firestore";
-            import "firebase/database";
-        </script>
 
-    </body>
+
+        console.log("--write datebase--");
+    </script>
 
 </body>
 
