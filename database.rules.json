@@ -1,7 +1,6 @@
 {
-  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
-  "rules": {
-    ".read": false,
-    ".write": false
-  }
+    "rules": {
+        ".read": "now < 1619881200000", // 2021-5-2
+        ".write": "now < 1619881200000" // 2021-5-2
+    }
 }

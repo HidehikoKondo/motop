@@ -10,6 +10,7 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
 
 
 <head>
+    <title>TOMETA</title>
     <!--OGP-->
     <meta property="og:title" content="トメタ（仮）" />
     <meta property="og:site_name" content="トメタ（仮）｜バイク駐輪場情報シェアアプリ" />
@@ -32,6 +33,7 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <script src="script.js"></script>
+    <script src="firebase.js"></script>
 
     <!-- Google Maps -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -42,6 +44,26 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 
+
+    <!-- import firebase from "firebase/app";
+    import "firebase/database";
+    <script>
+
+        console.log("xxx");
+        var database = firebase.database();
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('users/' + userId).set({
+                username: name,
+                email: email,
+                profile_picture: imageUrl
+            });
+            console.log("DB登録");
+        }
+
+        writeUserData("userID", "name", "email", "imageUrl");
+
+
+    </script> -->
 </head>
 
 <body>
@@ -51,6 +73,12 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
                 <ons-list>
                     <ons-list-item onclick="fn.load('home.html')" tappable>
                         マップ
+                    </ons-list-item>
+                    <ons-list-item onclick="fn.load('login.html')" tappable>
+                        ログイン
+                    </ons-list-item>
+                    <ons-list-item onclick="fn.load('mylist.html')" tappable>
+                        あなたの投稿
                     </ons-list-item>
                     <ons-list-item onclick="fn.load('settings.html')" tappable>
                         設定
@@ -81,7 +109,7 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
             </ons-toolbar> -->
             <!-- <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
         Swipe right to open the menu!
-      </p> -->
+        </p> -->
 
             <!-- <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1630.7190888019124!2d136.90997412597275!3d35.170629887057636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1590747266832!5m2!1sja!2sjp"
@@ -271,6 +299,25 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
         <button class="fab fab--mini" onclick="getElementById('GDPR').remove();" style="min-width: 40px;"><i
                 class="zmdi zmdi-close"></i></button>
     </div>
+
+
+    <body>
+        <script>// Firebase App (the core Firebase SDK) is always required and must be listed first
+            import firebase from "firebase/app";
+            // If you are using v7 or any earlier version of the JS SDK, you should import firebase using namespace import
+            // import * as firebase from "firebase/app"
+
+            // If you enabled Analytics in your project, add the Firebase SDK for Analytics
+            import "firebase/analytics";
+
+            // Add the Firebase products that you want to use
+            import "firebase/auth";
+            import "firebase/firestore";
+            import "firebase/database";
+        </script>
+
+    </body>
+
 </body>
 
 </html>
