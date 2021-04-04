@@ -183,7 +183,39 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
             </ons-card>
         </ons-page>
     </template>
+    <template id="login.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button onclick="fn.open()">
+                        <ons-icon icon="md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">
+                    Twitterログイン
+                </div>
+            </ons-toolbar>
+            <ons-card>
+                <h1>ユーザー情報</h1>
+                <table>
+                    <tr>
+                        <td>
+                            <img id="userIcon" src="images/noname.png">
+                        </td>
+                        <td>
+                            <span id="twitterName">未ログイン</span>
+                        </td>
+                    </tr>
+                </table>
+                <ons-button id="loginButton" ripple onclick="twitterLogin();">Twitterログイン</ons-button>
+                <ons-button id="logoutButton" ripple onclick="twitterLogout();">Twitterログアウト</ons-button>
+                <script>
+                    twitterStatus();
+                </script>
+            </ons-card>
 
+        </ons-page>
+    </template>
     <template id="about.html">
         <ons-page>
             <ons-toolbar>
@@ -288,6 +320,8 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="./twitter.js"></script>
+
     <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -321,19 +355,18 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
             dataRef.once("value")
                 .then(function (snapshot) {
                     console.log(snapshot.child("userId").child("email").val());
-
-                    // document.getElementById("age").innerHTML = snapshot.child("age").val();
-                    // document.getElementById("job").innerHTML = snapshot.child("job").val();
-                    // document.getElementById("name").innerHTML = snapshot.child("name").val();
                 });
         }
-        writeUserData("userId3", "name2", "email2", "imageUrl2");
+        writeUserData("userId5", "name4", "email4", "imageUrl4");
         read();
 
 
 
         console.log("--write datebase--");
     </script>
+
+
+
 
 </body>
 
