@@ -104,9 +104,9 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
             <div id="map"></div>
 
             <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-            <script
+            <!-- <script
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5UJ22OWXZvry9vyPGVyPXxxjnMZjtjPE&callback=initMap&libraries=&v=weekly"
-                async></script>
+                async></script> -->
             <script async
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5UJ22OWXZvry9vyPGVyPXxxjnMZjtjPE&callback=initMap">
                 </script>
@@ -201,6 +201,7 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
                     <tr>
                         <td>
                             <img id="userIcon" src="images/noname.png">
+                            <input type="hidden" id="userID" value="noid">
                         </td>
                         <td>
                             <span id="twitterName">未ログイン</span>
@@ -320,52 +321,9 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="./firebaseConfig.js"></script>
+    <script src="./database.js"></script>
     <script src="./twitter.js"></script>
-
-    <script>
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        var firebaseConfig = {
-            apiKey: "AIzaSyCjkSfFoCQ1tRPnu8OBOYPdG7B2wiET1ZQ",
-            authDomain: "motop-pwa.firebaseapp.com",
-            databaseURL: "https://motop-pwa.firebaseio.com",
-            projectId: "motop-pwa",
-            storageBucket: "motop-pwa.appspot.com",
-            messagingSenderId: "249359485469",
-            appId: "1:249359485469:web:5b1fb6defe9af88ff694f4",
-            measurementId: "G-1MGG8Y67FG"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        //analytics
-        firebase.analytics();
-        // Get a reference to the database service
-        var database = firebase.database();
-
-        function writeUserData(userId, name, email, imageUrl) {
-            firebase.database().ref('users/' + userId).set({
-                username: name,
-                email: email,
-                profile_picture: imageUrl
-            });
-        }
-        function read() {
-            var database = firebase.database();
-            var dataRef = database.ref('/users');
-            dataRef.once("value")
-                .then(function (snapshot) {
-                    console.log(snapshot.child("userId").child("email").val());
-                });
-        }
-        writeUserData("userId5", "name4", "email4", "imageUrl4");
-        read();
-
-
-
-        console.log("--write datebase--");
-    </script>
-
-
 
 
 </body>

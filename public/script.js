@@ -292,6 +292,22 @@ function closeMenu() {
 
 //投稿ボタン
 function share() {
+    if (isLogin()) {
+        postToDB();
+    } else {
+        alert("ログインしてください");
+    }
+}
+
+function postToDB() {
+    var id;
+    var name;
+    var lat;
+    var lng;
+    var message = "";
+}
+
+function postToTwitter() {
     var latLng = selectedLatLng.toUrlValue();
     var lat = latLng.split(",")[0];
     var lng = latLng.split(",")[1];
