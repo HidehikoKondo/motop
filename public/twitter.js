@@ -102,12 +102,25 @@ function twitterStatus() {
             console.log("sign out.");
             document.getElementById("userIcon").src = "images/noname.png";
             document.getElementById("twitterName").innerHTML = "未ログイン";
+            document.getElementById("userID").value = "";
             document
                 .getElementById("logoutButton")
                 .setAttribute("disabled", "true");
             document.getElementById("loginButton").removeAttribute("disabled");
         }
     });
+}
+
+function isLogin() {
+    var login = false;
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            login = true;
+        } else {
+            login = false;
+        }
+    });
+    return login;
 }
 
 function twitterUser() {
@@ -125,6 +138,7 @@ function twitterUser() {
     }
     document.getElementById("userIcon").src = photoUrl;
     document.getElementById("twitterName").innerHTML = name;
+    document.getElementById("userID").value = uid;
     document.getElementById("loginButton").setAttribute("disabled", "true");
     document.getElementById("logoutButton").removeAttribute("disabled");
 }
