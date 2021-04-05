@@ -19,6 +19,9 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     <meta property="og:url" content="https://motop-pwa.web.app/">
     <meta property="og:image" content="https://motop-pwa.web.app/images/OGP.png" />
 
+    <link rel="mask-icon" sizes="any" href="images/favicon.svg" color="#0bd">
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
     <!-- Service Worker -->
     <link rel="manifest" href="https://motop-pwa.web.app/manifest.json">
     <script>
@@ -104,9 +107,9 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
             <div id="map"></div>
 
             <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-            <script
+            <!-- <script
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5UJ22OWXZvry9vyPGVyPXxxjnMZjtjPE&callback=initMap&libraries=&v=weekly"
-                async></script>
+                async></script> -->
             <script async
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5UJ22OWXZvry9vyPGVyPXxxjnMZjtjPE&callback=initMap">
                 </script>

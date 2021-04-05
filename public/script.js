@@ -201,9 +201,9 @@ function initMap() {
             "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
     });
 
-    document.getElementById("submit").addEventListener("click", () => {
-        geocodeLatLng(geocoder, map, infoWindow);
-    });
+    // document.getElementById("submit").addEventListener("click", () => {
+    //     geocodeLatLng(geocoder, map, infoWindow);
+    // });
 }
 
 function currentPosition() {
