@@ -1,15 +1,20 @@
 // Get a reference to the database service
 var database = firebase.database();
 
-function writeUserData(userId, name, email, imageUrl) {
+//Todo: 引数に一意のIDを追加
+function writeUserData(userID, name, lat, lng, area, comment) {
     firebase
         .database()
-        .ref("users/" + userId)
+        .ref("users/" + userID)
         .set({
+            userID: userID,
             username: name,
-            email: email,
-            profile_picture: imageUrl,
+            lat: lat,
+            lng: lng,
+            area: area,
+            comment: comment,
         });
+    console("書き込み完了");
 }
 function read() {
     var database = firebase.database();
@@ -18,5 +23,5 @@ function read() {
         console.log(snapshot.child("userId").child("email").val());
     });
 }
-writeUserData("userId5", "name4", "email4", "imageUrl4");
+//writeUserData("userId5", "name4", "email4", "imageUrl4");
 read();

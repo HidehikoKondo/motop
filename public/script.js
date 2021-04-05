@@ -1,4 +1,4 @@
-//getパラメータ取得
+//getパラメータ取得 (位置情報付きのリンクから開いたとき)
 var queryString = window.location.search;
 var queryObject = new Object();
 if (queryString) {
@@ -21,7 +21,7 @@ var defaultLng = queryObject["lng"];
 // alert(queryObject["lat"]);
 // alert(queryObject["lng"]);
 
-//マーカーの配置場所配列
+//マーカーの配置場所配列（テスト用）
 const locations = [
     { lat: 35.1709071, lng: 136.909453 },
     { lat: 35.1709076, lng: 136.8074532 },
@@ -58,6 +58,16 @@ ons.ready(function () {
         app.hideFromTemplate = sheet.hide.bind(sheet);
     });
 });
+
+//投稿用データ保持（ログイン時とマーカークリック時に更新）
+var postData = {
+    userID: "",
+    name: "",
+    lat: "",
+    lng: "",
+    area: "",
+    comment: "",
+};
 
 // <!--マップの制御 -->
 let map;
@@ -300,11 +310,21 @@ function share() {
 }
 
 function postToDB() {
-    var id;
-    var name;
-    var lat;
-    var lng;
-    var message = "";
+    var latLng = selectedLatLng.toUrlValue();
+    var lat = latLng.split(",")[0];
+    var lng = latLng.split(",")[1];
+    var comment = "コメント";
+    var area = "エリア";
+    var userID = postData["userID"];
+    var name = postData["name"];
+
+    console.log(lat);
+    console.log(lng);
+    console.log(comment);
+    console.log(userID);
+    console.log(name);
+
+    writeUserData(userID, name, lat, lng, area, comment);
 }
 
 function postToTwitter() {
