@@ -113,13 +113,13 @@ function twitterStatus() {
 
 function isLogin() {
     var login = false;
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            login = true;
-        } else {
-            login = false;
-        }
-    });
+    var user = firebase.auth().currentUser;
+    if (user) {
+        // User is signed in.
+        login = true;
+    } else {
+        login = false;
+    }
     return login;
 }
 
@@ -128,6 +128,7 @@ function twitterUser() {
     var name, email, photoUrl, uid, emailVerified;
 
     if (user != null) {
+        console.log("通った");
         name = user.displayName;
         email = user.email;
         photoUrl = user.photoURL;
@@ -135,10 +136,20 @@ function twitterUser() {
         uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken() instead.
+    } else {
+        console.log("通っってない");
     }
-    document.getElementById("userIcon").src = photoUrl;
-    document.getElementById("twitterName").innerHTML = name;
-    document.getElementById("userID").value = uid;
-    document.getElementById("loginButton").setAttribute("disabled", "true");
-    document.getElementById("logoutButton").removeAttribute("disabled");
+
+    //ログイン画面が表示中のみ実行
+    if (document.getElementById("userIcon")) {
+        document.getElementById("userIcon").src = photoUrl;
+        document.getElementById("twitterName").innerHTML = name;
+        document.getElementById("userID").value = uid;
+        document.getElementById("loginButton").setAttribute("disabled", "true");
+        document.getElementById("logoutButton").removeAttribute("disabled");
+    }
+
+    //postデータ更新
+    postData["userID"] = uid;
+    postData["name"] = name;
 }

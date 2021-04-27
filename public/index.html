@@ -19,6 +19,9 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     <meta property="og:url" content="https://tometa.bike/">
     <meta property="og:image" content="https://tometa.bike/images/OGP.png" />
 
+    <link rel="mask-icon" sizes="any" href="images/favicon.svg" color="#0bd">
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
     <!-- Service Worker -->
     <link rel="manifest" href="https://tometa.bike/manifest.json">
     <script>
@@ -210,7 +213,7 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
                     <tr>
                         <td>
                             <img id="userIcon" src="images/noname.png">
-                            <input type="hidden" id="userID" value="noid">
+                            <input type="hidden" id="userID" value="">
                         </td>
                         <td>
                             <span id="twitterName">未ログイン</span>
@@ -345,7 +348,9 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     <script src="./database.js"></script>
     <script src="./twitter.js"></script>
 
-
+    <script>
+        twitterStatus();
+    </script>
 </body>
 
 </html>
