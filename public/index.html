@@ -16,15 +16,15 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     <meta property="og:site_name" content="トメタ（仮）｜バイク駐輪場情報シェアアプリ" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="バイクを停められる場所をみんなでシェアしよう！" />
-    <meta property="og:url" content="https://motop-pwa.web.app/">
-    <meta property="og:image" content="https://motop-pwa.web.app/images/OGP.png" />
+    <meta property="og:url" content="https://tometa.bike/">
+    <meta property="og:image" content="https://tometa.bike/images/OGP.png" />
 
     <!-- Service Worker -->
-    <link rel="manifest" href="https://motop-pwa.web.app/manifest.json">
+    <link rel="manifest" href="https://tometa.bike/manifest.json">
     <script>
         window.addEventListener('load', function () {
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register("https://motop-pwa.web.app/sw.js");
+                navigator.serviceWorker.register("https://tometa.bike/sw.js");
             }
         });
     </script>
@@ -72,6 +72,15 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
                     <ons-list-item onclick="fn.load('privacypolicy.html')" tappable>
                         利用規約<br />プライバシーポリシー
                     </ons-list-item>
+                    <script async
+                        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3324877759270339"
+                        crossorigin="anonymous"></script>
+                    <!-- TOMETA　サイドメニュー -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3324877759270339"
+                        data-ad-slot="9727305224" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </ons-list>
             </ons-page>
         </ons-splitter-side>
@@ -309,7 +318,18 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
     </template>
     <div class="toast" id="GDPR">
         <div class="toast__message">
+
             このアプリは開発中です。まだ動作しない機能もあります。ご注意ください。
+
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3324877759270339"
+                crossorigin="anonymous"></script>
+            <!-- TOMETA バナー広告 -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3324877759270339"
+                data-ad-slot="9220340081" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
             <!-- このサイトでは、サイトや広告を改善するためにCookieを利用します。サイトを利用することで、Cookieの使用に同意するものとします。また当サービスの利用規約にも同意したものとします。 -->
         </div>
         <button class="fab fab--mini" onclick="getElementById('GDPR').remove();" style="min-width: 40px;"><i

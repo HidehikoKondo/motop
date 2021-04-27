@@ -318,7 +318,7 @@ function postToTwitter() {
     var url =
         "https://twitter.com/intent/tweet?text=%E3%83%90%E3%82%A4%E3%82%AF%E7%BD%AE%E3%81%91%E3%82%8B%E3%82%88[" +
         selectedAddress +
-        "]&hashtags=%E3%83%88%E3%83%A1%E3%82%BF,%E3%83%90%E3%82%A4%E3%82%AF%E9%A7%90%E8%BC%AA%E5%A0%B4&url=https%3A%2F%2Fmotop-pwa.web.app%2F%3Flat%3D" +
+        "]&hashtags=%E3%83%88%E3%83%A1%E3%82%BF,%E3%83%90%E3%82%A4%E3%82%AF%E9%A7%90%E8%BC%AA%E5%A0%B4&url=https%3A%2F%2Ftometa.bike%2F%3Flat%3D" +
         lat +
         "%26lng%3D" +
         lng;
