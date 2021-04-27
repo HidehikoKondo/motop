@@ -14,7 +14,7 @@ function writeUserData(userID, name, lat, lng, area, comment) {
             area: area,
             comment: comment,
         });
-    console("書き込み完了");
+    console.log("書き込み完了");
 }
 function read() {
     var database = firebase.database();
