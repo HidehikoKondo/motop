@@ -53,6 +53,13 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
 </head>
 
 <body>
+    <!--firebase設定-->
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="./firebaseConfig.js"></script>
+
     <ons-splitter>
         <ons-splitter-side id="menu" side="left" width="220px" collapse>
             <ons-page>
@@ -338,12 +345,7 @@ https://twitter.com/intent/tweet?text=バイク置けるよ[ｘｘｘ付近]&has
                 class="zmdi zmdi-close"></i></button>
     </div>
 
-    <!--firebase-->
-    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
-    <script src="./firebaseConfig.js"></script>
+    <!-- js読み込み -->
     <script src="./database.js"></script>
     <script src="./twitter.js"></script>
 
