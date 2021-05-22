@@ -78,21 +78,49 @@ var selectedAddress;
 
 function initMap() {
     //マップの初期位置
-    map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 18,
-        center: { lat: 35.1709076, lng: 136.9074532 },
-        disableDefaultUI: true,
-        //                zoomControl: true,
-        streetViewControl: false,
-        //お店のアイコン削除
-        clickableIcons: false,
-        styles: [
-            {
-                featureType: "poi.business",
-                stylers: [{ visibility: "off" }],
-            },
-        ],
+    // map = new google.maps.Map(document.getElementById("map"), {
+    //     zoom: 18,
+    //     center: { lat: 35.1709076, lng: 136.9074532 },
+    //     mapId: 'f8b2ac2552664eae',
+    //     disableDefaultUI: true,
+    //     //                zoomControl: true,
+    //     streetViewControl: false,
+    //     //お店のアイコン削除
+    //     clickableIcons: false,
+    //     styles: [
+    //         {
+    //             featureType: "poi.business",
+    //             stylers: [{ visibility: "off" }],
+    //         },
+    //     ],
+    // });
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+        mapId: 'f8b2ac2552664eae'
     });
+
+    map.moveCamera({
+        center: new google.maps.LatLng(37.7893719, -122.3942),
+        zoom: 16,
+        heading: 320,
+        tilt: 47.5
+    });
+
+    const degreesPerSecond = 3;
+
+    function animateCamera(time) {
+        // Update the heading, leave everything else as-is.
+        map.moveCamera({
+            heading: (time / 1000) * degreesPerSecond
+        });
+
+        requestAnimationFrame(animateCamera);
+    }
+
+    // Start the animation.
+    requestAnimationFrame(animateCamera);
 
     //ストリートビュー
     const astorPlace = { lat: 40.729884, lng: -73.990988 };
